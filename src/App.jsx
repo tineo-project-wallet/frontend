@@ -2,12 +2,13 @@ import { Route, Routes } from "react-router-dom";
 
 import { basicRouteList, adminRouteList } from "./routes/routeList.js";
 import LoggedLayout from "./components/layout/logged/LoggedLayout.jsx";
+import Login from "./pages/Login.jsx";
 
 function App() {
   return (
     <>
       <Routes>
-        <Route path={basicRouteList.login} element={<h1>Login</h1>} />
+        <Route path={basicRouteList.login} element={<Login />} />
         <Route path={basicRouteList.register} element={<h1>Register</h1>} />
 
         <Route element={<LoggedLayout />}>
