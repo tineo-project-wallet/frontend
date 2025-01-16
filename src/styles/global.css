@@ -1,0 +1,20 @@
+:root[data-theme="light"] {
+  --text: #1a0505;
+  --background: #fdf7f7;
+  --primary: #b5e45e;
+  --secondary: #ebe889;
+  --accent: #de3b43;
+}
+
+:root[data-theme="dark"] {
+  --text: #fae5e5;
+  --background: #080202;
+  --primary: #72a11b;
+  --secondary: #767214;
+  --accent: #c42129;
+}
+
+/* todo use document element setattribute to main.jsx */
+:root {
+  --text: 1a0505;
+}
