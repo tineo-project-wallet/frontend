@@ -14,9 +14,9 @@ function Login() {
       <form method="post" className={styles.form}>
         <input
           type="text"
-          id="email"
-          name="email"
-          placeholder="Email"
+          id="username"
+          name="username"
+          placeholder="Username"
           required
           className={styles.input}
         />
