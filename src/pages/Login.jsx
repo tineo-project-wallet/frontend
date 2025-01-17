@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { basicRouteList } from "../routes/routeList";
 
-import styles from "../styles/pages/login.module.css";
+import styles from "../styles/pages/login.register.module.css";
 
 function Login() {
   return (
