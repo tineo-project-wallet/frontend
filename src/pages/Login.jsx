@@ -1,42 +1,55 @@
 import { Link } from "react-router-dom";
 import { basicRouteList } from "../routes/routeList";
 
+import styles from "../styles/pages/login.module.css";
+
 function Login() {
   return (
     <>
-      <h1>Wallet</h1>
+      <header className={styles.header}>
+        <h1 className={styles.h1}>Wallet</h1>
+        <h2 className={styles.h2}>Sign in to your account</h2>
+      </header>
 
-      <h2>Welcome back</h2>
+      <form method="post" className={styles.form}>
+        <input
+          type="text"
+          id="email"
+          name="email"
+          placeholder="Email"
+          required
+          className={styles.input}
+        />
+        <p className={styles.errorInputMessage}>This field is required</p>
 
-      <form method="post">
-        <label htmlFor="email">
-          Email address
-          <input
-            type="text"
-            id="email"
-            name="email"
-            placeholder="demo@gmail.com"
-            required
-          />
-        </label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          placeholder="Password"
+          required
+          className={styles.input}
+        />
+        <p className={styles.errorInputMessage}>This field is required</p>
 
-        <label htmlFor="password">
-          Password
-          <input
-            type="password"
-            id="password"
-            name="password"
-            placeholder="*************"
-            required
-          />
-        </label>
+        <p className={styles.errorLoginMessage}>
+          Incorrect username or password
+        </p>
 
-        <button type="submit">Sign in</button>
+        {/* <p>
+          <Link className={styles.linkSignUp}>Forgot password</Link>
+        </p> */}
+
+        <button type="submit" className={styles.button}>
+          Sign in
+        </button>
+
+        <p>
+          <Link to={basicRouteList.register} className={styles.linkSignUp}>
+            Don&apos;t have an account?
+          </Link>
+        </p>
       </form>
-
-      <p>
-        <Link to={basicRouteList.register}>Don&apos;t have an account?</Link>
-      </p>
     </>
   );
 }

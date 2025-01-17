@@ -1,0 +1,75 @@
+* {
+  font-family: "Noto Sans Hatran", serif;
+}
+
+.header {
+  text-align: center;
+  margin-top: 10vh;
+}
+
+.h1 {
+  color: var(--text);
+  font-size: 2rem;
+  font-family: "Playwrite IN", serif;
+}
+
+.h2 {
+  font-size: 1.3rem;
+  font-weight: 100;
+}
+
+.form {
+  width: 80%;
+  margin: auto;
+  padding: 20px;
+
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: stretch;
+  align-content: stretch;
+}
+
+.input {
+  margin: 10px 0;
+  padding: 10px;
+  border: 1px solid #adadad;
+  border-radius: 5px;
+}
+
+.input::placeholder {
+  color: #adadad;
+}
+
+.button {
+  margin: 10px 0 0;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #1e1e1e;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.errorInputMessage,
+.errorLoginMessage {
+  color: #df0505;
+  font-size: 0.7rem;
+  margin: 0 0 16px;
+}
+
+.errorLoginMessage {
+  text-align: center;
+  background-color: #ebccce;
+  padding: 14px;
+  border-radius: 5px;
+  margin: 0;
+}
+
+.linkSignUp,
+.linkSignUp:visited {
+  color: #1e1e1e;
+  text-decoration: underline;
+}
