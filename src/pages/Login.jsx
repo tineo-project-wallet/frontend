@@ -1,18 +1,17 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import { basicRouteList } from "../routes/routeList";
+import axios from "axios";
 
+import { basicRouteList } from "../routes/routeList";
+import { URLAPI } from "../utils/constant";
 import styles from "../styles/pages/login.register.module.css";
 
 function Login() {
+  const urlAPILogin = URLAPI + "/auth/login";
   const [errorInput, setErrorInput] = useState({
     username: "",
     password: "",
     api: "",
-  });
-  const [user, setUser] = useState({
-    username: "",
-    password: "",
   });
 
   const handleErrorInput = (e) => {
@@ -31,20 +30,29 @@ function Login() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    // check error messages
     if (Object.values(errorInput).some((value) => value !== "")) {
       // todo - add modal
       alert("Please fill in the form correctly");
-      return
+      return;
     }
 
+    // extract data
     const form = e.target;
     const formData = new FormData(form);
     const username = formData.get("username");
     const password = formData.get("password");
-    setUser({ username, password });
-    console.log(user);
 
-    // fetch
+    const fetchAPI = async (url) => {
+      try {
+        const res = await axios.post(url, { username, password });
+        const data = res.data;
+        localStorage.setItem("access-token", data.data.accessToken);
+      } catch (error) {
+        alert(error.response.data.message);
+      }
+    };
+    fetchAPI(urlAPILogin);
   };
 
   return (
