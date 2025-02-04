@@ -1,19 +1,19 @@
-import { Link } from "react-router-dom";
-import { basicRouteList } from "../routes/routeList";
-
-import styles from "../styles/pages/login.register.module.css";
-import InputForm from "../components/auth/InputForm";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
+
 import { URLAPI } from "../utils/constant";
+import { basicRouteList } from "../routes/routeList";
+import InputForm from "../components/auth/InputForm";
+import styles from "../styles/pages/login.register.module.css";
 
 function Register() {
+  const navigate = useNavigate();
   const urlAPIRegister = URLAPI + "/auth/register";
   const [errorInput, setErrorInput] = useState({
     username: "",
     password: "",
   });
-
   const [responseAPI, setResponseAPI] = useState("");
 
   const handleErrorInput = (e) => {
@@ -57,6 +57,7 @@ function Register() {
         const res = await axios.post(url, body);
         const data = res.data;
         localStorage.setItem("access-token", data.data.accessToken);
+        navigate("/profile");
       } catch (error) {
         setResponseAPI(error.response.data.message);
       }

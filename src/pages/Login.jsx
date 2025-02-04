@@ -1,19 +1,21 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
 
-import { basicRouteList } from "../routes/routeList";
 import { URLAPI } from "../utils/constant";
-import styles from "../styles/pages/login.register.module.css";
+import { basicRouteList } from "../routes/routeList";
 import InputForm from "../components/auth/InputForm";
+import styles from "../styles/pages/login.register.module.css";
 
 function Login() {
+  const navigate = useNavigate();
   const urlAPILogin = URLAPI + "/auth/login";
   const [errorInput, setErrorInput] = useState({
     username: "",
     password: "",
     api: "",
   });
+  const [responseAPI, setResponseAPI] = useState("");
 
   const handleErrorInput = (e) => {
     const { name, value } = e.target;
@@ -49,8 +51,9 @@ function Login() {
         const res = await axios.post(url, { username, password });
         const data = res.data;
         localStorage.setItem("access-token", data.data.accessToken);
+        navigate("/profile");
       } catch (error) {
-        alert(error.response.data.message);
+        setResponseAPI(error.response.data.message);
       }
     };
     fetchAPI(urlAPILogin);
@@ -89,10 +92,8 @@ function Login() {
           <p className={styles.errorInputMessage}>{errorInput.password}</p>
         )}
 
-        {errorInput.api && (
-          <p className={styles.errorLoginMessage}>
-            Incorrect username or password
-          </p>
+        {responseAPI && (
+          <p className={styles.errorLoginMessage}>{responseAPI}</p>
         )}
 
         {/* <p>
