@@ -66,11 +66,6 @@ function Login() {
 
   return (
     <>
-      <header className={styles.header}>
-        <h1 className={styles.h1}>Wallet</h1>
-        <h2 className={styles.h2}>Sign in to your account</h2>
-      </header>
-
       <form method="post" className={styles.form} onSubmit={handleSubmit}>
         <InputForm
           type="text"
