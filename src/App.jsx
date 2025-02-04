@@ -1,16 +1,19 @@
 import { Route, Routes } from "react-router-dom";
 
 import { basicRouteList, adminRouteList } from "./routes/routeList.js";
-import LoggedLayout from "./components/layout/logged/LoggedLayout.jsx";
+import LoggedLayout from "./layout/logged/LoggedLayout.jsx";
 import Login from "./pages/Login.jsx";
 import Register from "./pages/Register.jsx";
+import AuthLayout from "./layout/auth/AuthLayout.jsx";
 
 function App() {
   return (
     <>
       <Routes>
-        <Route path={basicRouteList.login} element={<Login />} />
-        <Route path={basicRouteList.register} element={<Register />} />
+        <Route element={<AuthLayout />}>
+          <Route path={basicRouteList.login} element={<Login />} />
+          <Route path={basicRouteList.register} element={<Register />} />
+        </Route>
 
         <Route element={<LoggedLayout />}>
           <Route path={basicRouteList.home} element={<h1>Home</h1>} />

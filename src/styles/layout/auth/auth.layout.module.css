@@ -1,0 +1,19 @@
+* {
+  font-family: "Noto Sans Hatran", serif;
+}
+
+.header {
+  text-align: center;
+  margin-top: 10vh;
+}
+
+.h1 {
+  color: var(--text);
+  font-size: 2rem;
+  font-family: "Playwrite IN", serif;
+}
+
+.h2 {
+  font-size: 1.3rem;
+  font-weight: 100;
+}
