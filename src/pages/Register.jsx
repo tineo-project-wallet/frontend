@@ -2,8 +2,73 @@ import { Link } from "react-router-dom";
 import { basicRouteList } from "../routes/routeList";
 
 import styles from "../styles/pages/login.register.module.css";
+import InputForm from "../components/auth/InputForm";
+import { useState } from "react";
+import axios from "axios";
+import { URLAPI } from "../utils/constant";
 
 function Register() {
+  const urlAPIRegister = URLAPI + "/auth/register";
+  const [errorInput, setErrorInput] = useState({
+    username: "",
+    password: "",
+  });
+
+  const [responseAPI, setResponseAPI] = useState("");
+
+  const handleErrorInput = (e) => {
+    const { name, value } = e.target;
+    let errorMessage = "";
+
+    if (name != "fullname" && value.length === 0) {
+      errorMessage = "This field is required";
+    } else if (name === "username" && value.length < 3) {
+      errorMessage = "Username must be at least 3 characters";
+    }
+
+    setErrorInput({ ...errorInput, [name]: errorMessage });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (Object.values(errorInput).some((value) => value !== "")) {
+      // todo - add modal
+      alert("Please fill in the form correctly");
+      return;
+    }
+
+    const form = e.target;
+    const formData = new FormData(form);
+    const fullname = formData.get("username");
+    const username = formData.get("username");
+    const password = formData.get("password");
+
+    const body = {
+      username,
+      password,
+    };
+    if (fullname.length == 0) {
+      body.fullname = fullname;
+    }
+
+    const fetchAPI = async (url) => {
+      try {
+        const res = await axios.post(url, body);
+        const data = res.data;
+        localStorage.setItem("access-token", data.data.accessToken);
+      } catch (error) {
+        setResponseAPI(error.response.data.message);
+      }
+    };
+    fetchAPI(urlAPIRegister);
+
+    const inputUsername = document.querySelector("#username");
+    const inputPassword = document.querySelector("#password");
+    inputUsername.value = "";
+    inputPassword.value = "";
+  };
+
   return (
     <>
       <header className={styles.header}>
@@ -11,38 +76,39 @@ function Register() {
         <h2 className={styles.h2}>Create your account</h2>
       </header>
 
-      <form method="post" className={styles.form}>
-        <input
+      <form method="post" className={styles.form} onSubmit={handleSubmit}>
+        <InputForm
           type="text"
-          id="fullname"
-          name="fullname"
+          idName="fullname"
           placeholder="Full name"
-          className={styles.input}
+          onChange={handleErrorInput}
         />
 
-        <input
+        <InputForm
           type="text"
-          id="username"
-          name="username"
-          placeholder="Username*"
-          required
-          className={styles.input}
+          idName="username"
+          placeholder="Username"
+          onChange={handleErrorInput}
         />
-        <p className={styles.errorInputMessage}>This field is required</p>
 
-        <input
+        {errorInput.username && (
+          <p className={styles.errorInputMessage}>{errorInput.username}</p>
+        )}
+
+        <InputForm
           type="password"
-          id="password"
-          name="password"
-          placeholder="Password*"
-          required
-          className={styles.input}
+          idName="password"
+          placeholder="Password"
+          onChange={handleErrorInput}
         />
-        <p className={styles.errorInputMessage}>This field is required</p>
 
-        <p className={styles.errorLoginMessage}>
-          Incorrect username or password
-        </p>
+        {errorInput.password && (
+          <p className={styles.errorInputMessage}>{errorInput.password}</p>
+        )}
+
+        {responseAPI && (
+          <p className={styles.errorLoginMessage}>{responseAPI}</p>
+        )}
 
         <button type="submit" className={styles.button}>
           Sign up

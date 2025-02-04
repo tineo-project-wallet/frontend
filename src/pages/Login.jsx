@@ -5,6 +5,7 @@ import axios from "axios";
 import { basicRouteList } from "../routes/routeList";
 import { URLAPI } from "../utils/constant";
 import styles from "../styles/pages/login.register.module.css";
+import InputForm from "../components/auth/InputForm";
 
 function Login() {
   const urlAPILogin = URLAPI + "/auth/login";
@@ -53,6 +54,11 @@ function Login() {
       }
     };
     fetchAPI(urlAPILogin);
+
+    const inputUsername = document.querySelector("#username");
+    const inputPassword = document.querySelector("#password");
+    inputUsername.value = "";
+    inputPassword.value = "";
   };
 
   return (
@@ -63,24 +69,20 @@ function Login() {
       </header>
 
       <form method="post" className={styles.form} onSubmit={handleSubmit}>
-        <input
+        <InputForm
           type="text"
-          id="username"
-          name="username"
+          idName="username"
           placeholder="Username"
-          className={styles.input}
           onChange={handleErrorInput}
         />
         {errorInput.username && (
           <p className={styles.errorInputMessage}>{errorInput.username}</p>
         )}
 
-        <input
+        <InputForm
           type="password"
-          id="password"
-          name="password"
+          idName="password"
           placeholder="Password"
-          className={styles.input}
           onChange={handleErrorInput}
         />
         {errorInput.password && (
