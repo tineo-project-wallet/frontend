@@ -25,6 +25,8 @@ function Login() {
       errorMessage = "This field is required";
     } else if (name == "username" && value.length < 3) {
       errorMessage = "Username must be at least 3 characters";
+    } else if (name === "password" && value.length < 8) {
+      errorMessage = "Password must be at least 8 characters";
     }
 
     setErrorInput({ ...errorInput, [name]: errorMessage });

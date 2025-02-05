@@ -22,8 +22,10 @@ function Register() {
 
     if (name != "fullname" && value.length === 0) {
       errorMessage = "This field is required";
-    } else if (name === "username" && value.length < 3) {
+    } else if (name === "username" && value.length < 5) {
       errorMessage = "Username must be at least 3 characters";
+    } else if (name === "password" && value.length < 8) {
+      errorMessage = "Password must be at least 8 characters";
     }
 
     setErrorInput({ ...errorInput, [name]: errorMessage });
@@ -63,11 +65,6 @@ function Register() {
       }
     };
     fetchAPI(urlAPIRegister);
-
-    const inputUsername = document.querySelector("#username");
-    const inputPassword = document.querySelector("#password");
-    inputUsername.value = "";
-    inputPassword.value = "";
   };
 
   return (
